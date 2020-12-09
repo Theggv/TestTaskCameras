@@ -26,13 +26,9 @@ namespace TestTaskCameras.Tests.ApiTests
         public async Task GetMjpegStreamTest()
         {
             var cts = new CancellationTokenSource();
-            List<byte> previous = new List<byte>();
+            var parser = new MJpegStreamParser();
 
-            await ApiRequests.GetMJpegStreamAsync(cts.Token, (buffer, length) =>
-            {
-                int index = 0;
-
-            });
+            await ApiRequests.GetMJpegStreamAsync(cts.Token, (buffer, len) => parser.BufferHandler(buffer, len));
         }
     }
 }
