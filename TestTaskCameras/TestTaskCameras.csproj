@@ -70,11 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Api\ApiRequests.cs" />
-    <Compile Include="Models\Api\Interfaces\IChannelInfo.cs" />
-    <Compile Include="Models\Api\Interfaces\IConfiguration.cs" />
-    <Compile Include="Models\Api\Interfaces\IMobileServerInfo.cs" />
-    <Compile Include="Models\Api\Interfaces\IResolutionInfo.cs" />
-    <Compile Include="Models\Api\Interfaces\IServerInfo.cs" />
+    <Compile Include="Models\Api\Interfaces\ChannelInfo.cs" />
+    <Compile Include="Models\Api\Interfaces\Configuration.cs" />
+    <Compile Include="Models\Api\Interfaces\MobileServerInfo.cs" />
+    <Compile Include="Models\Api\Interfaces\ResolutionInfo.cs" />
+    <Compile Include="Models\Api\Interfaces\ServerInfo.cs" />
+    <Compile Include="Models\Api\MJpegStreamParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

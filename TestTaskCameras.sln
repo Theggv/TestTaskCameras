@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskCameras", "TestTaskCameras\TestTaskCameras.csproj", "{7556D202-BB95-4700-8CE6-851AC9FD9607}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskCameras.Tests", "TestTaskCameras.Tests\TestTaskCameras.Tests.csproj", "{C44D3B2F-3DA2-4DD8-AE95-A21280259C63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7556D202-BB95-4700-8CE6-851AC9FD9607}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7556D202-BB95-4700-8CE6-851AC9FD9607}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7556D202-BB95-4700-8CE6-851AC9FD9607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C44D3B2F-3DA2-4DD8-AE95-A21280259C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C44D3B2F-3DA2-4DD8-AE95-A21280259C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C44D3B2F-3DA2-4DD8-AE95-A21280259C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C44D3B2F-3DA2-4DD8-AE95-A21280259C63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
