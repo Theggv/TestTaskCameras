@@ -14,7 +14,7 @@ namespace TestTaskCameras.Models
 {
     public class CameraModel: ViewModelBase
     {
-        public ChannelInfo Channel => request?.Channel;
+        public ChannelInfo Channel => channel;
 
         public BitmapImage Frame
         {
@@ -24,30 +24,37 @@ namespace TestTaskCameras.Models
 
         public bool IsEnable => stream.IsStarted;
 
-
-        private BitmapImage frame;
-        private CameraRequest request;
         private readonly MJpegStream stream;
+        private BitmapImage frame;
+
+        private ChannelInfo channel;
+        private ResolutionInfo resolution;
 
 
         public CameraModel() 
         {
-            stream = new MJpegStream(request);
+            stream = new MJpegStream(channel, resolution);
             stream.OnFrameReady += UpdateFrame;
-            stream.Start();
         }
 
 
-        public void SetRequest(CameraRequest request)
+        public void SetChannel(ChannelInfo channel)
         {
-            if(request == null)
+            if(channel == null)
                 return;
 
-            this.request = request;
-            stream.ChangeChannel(request.Channel);
-            stream.ChangeResolution(request.Resolution);
+            this.channel = channel;
+            stream.ChangeChannel(channel);
         }
 
+        public void SetResolution(ResolutionInfo resolution)
+        {
+            if (resolution == null)
+                return;
+
+            this.resolution = resolution;
+            stream.ChangeResolution(resolution);
+        }
 
         public void Enable() => stream.Start();
 

@@ -65,8 +65,6 @@ namespace TestTaskCameras.Models.Api
                     }
                 }
             }
-
-            Console.WriteLine();
         }
     }
 }

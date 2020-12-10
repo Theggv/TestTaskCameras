@@ -12,18 +12,33 @@
         <viewModels:MainViewModel />
     </Window.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="220"/>
         </Grid.ColumnDefinitions>
+        
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2"
+                    Background="LightBlue">
+            <Button Content="Reload channels " Margin="5" Padding="10 0 10 0"
+                    Command="{Binding ReloadConfiguration}"/>
+        </StackPanel>
 
         <!-- Selected camera -->
-        <views:CameraView Grid.Column="0" Margin="10"
-            DataContext="{Binding SelectedCamera, Mode=OneWay}"/>
+        <views:CameraView Grid.Column="0" Grid.Row="1" Margin="10"
+                          Visibility="{Binding  
+            RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, 
+            Path=DataContext.CameraVisibility,
+            FallbackValue=Hidden}"
+                          DataContext="{Binding SelectedCamera, Mode=OneWay}"/>
 
         <!-- Other cameras -->
-        <ListBox Grid.Column="1"
-                 ItemsSource="{Binding OtherCameras}" SelectedItem="{Binding SelectedCamera}"
+        <ListBox Grid.Column="1" Grid.Row="1"
+                 ItemsSource="{Binding AvailableCameras}" SelectedItem="{Binding SelectedCamera}"
                  HorizontalContentAlignment="Stretch" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"

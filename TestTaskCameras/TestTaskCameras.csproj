@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\CameraModel.cs" />
     <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="ViewModels\CameraViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

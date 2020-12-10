@@ -32,11 +32,9 @@ namespace TestTaskCameras.Models.MJpeg
         private CancellationTokenSource cts;
 
 
-        public MJpegStream(CameraRequest request): 
+        public MJpegStream(CameraRequest request) :
             this(request?.Channel, request?.Resolution)
-        {
-
-        }
+        { }
 
         public MJpegStream(ChannelInfo channel, ResolutionInfo resolution = null)
         {
@@ -57,13 +55,13 @@ namespace TestTaskCameras.Models.MJpeg
         }
 
 
-        public void Start(StreamMode streamMode = StreamMode.Streaming)
+        public void Start(StreamMode mode = StreamMode.Streaming)
         {
             if (isStarted || cameraRequest == null || cameraRequest.Channel == null)
                 return;
 
             isStarted = true;
-            this.streamMode = streamMode;
+            streamMode = mode;
             cts = new CancellationTokenSource();
 
             Task.Run(async () =>

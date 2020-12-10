@@ -19,10 +19,7 @@ namespace TestTaskCameras.Models
 
         private ChannelConfiguration configuration;
 
-        public MainModel()
-        {
-
-        }
+        public MainModel() { }
 
         public async Task LoadConfigurationAsync()
         {

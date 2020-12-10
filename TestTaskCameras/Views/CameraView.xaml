@@ -6,15 +6,30 @@
              xmlns:local="clr-namespace:TestTaskCameras.Views"
              xmlns:viewModels="clr-namespace:TestTaskCameras.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="480" d:DesignWidth="640">
 
     <Viewbox Stretch="Uniform">
-        <Grid d:DataContext="{d:DesignInstance viewModels:CameraViewModel}">
-            <Image Source="{Binding Frame}"></Image>
+        <Grid d:DataContext="{d:DesignInstance viewModels:CameraViewModel}"
+               MinHeight="320" MinWidth="640">
+            <Image Source="{Binding Frame}"/>
 
             <TextBlock FontSize="16" Text="{Binding Name}" 
                    Margin="5"
                    VerticalAlignment="Top" HorizontalAlignment="Right"/>
+
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+                        Height="20" Margin="0 0 5 5">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="5 0 0 0"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Button Content="640x480" Command="{Binding LowResolution}"/>
+                <Button Content="800x480" Command="{Binding MiddleResolution}"/>
+                <Button Content="1280x720" Command="{Binding HighResolution}"/>
+            </StackPanel>
         </Grid>
     </Viewbox>
 </UserControl>
