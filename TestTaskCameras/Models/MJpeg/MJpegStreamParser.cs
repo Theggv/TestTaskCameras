@@ -1,31 +1,26 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Media.Imaging;
 
-namespace TestTaskCameras.Models.Api
+namespace TestTaskCameras.Models.MJpeg
 {
     public class MJpegStreamParser : IDisposable
     {
-        public event EventHandler<BitmapFrame> OnImageReady;
+        public event EventHandler<FrameReadyEventArgs> OnFrameReady;
 
-        private bool isStartFound;
+
+        private bool isStartFound = false;
         private MemoryStream memoryStream;
 
         private byte currentByte;
         private byte previousByte;
 
-        public MJpegStreamParser()
+
+        public MJpegStreamParser() 
         {
-            isStartFound = false;
             memoryStream = new MemoryStream();
-            previousByte = 0;
         }
 
-        /*
-         *  Idea of algorithm:
-         *      1) Find start
-         *      2) 
-         */
+
         public void BufferHandler(byte[] buffer, int length, int startIndex = 0)
         {
             var index = startIndex;
@@ -59,7 +54,7 @@ namespace TestTaskCameras.Models.Api
                     {
                         isStartFound = false;
                         memoryStream.Write(buffer, startIndex, index - startIndex + 1);
-                        ParseImage();
+                        SendFrame();
                     }
                     else if (index == length - 1)
                     {
@@ -72,23 +67,14 @@ namespace TestTaskCameras.Models.Api
             }
         }
 
-        public void ParseImage()
+        public void SendFrame()
         {
-            try
-            {
-                memoryStream.Seek(0, SeekOrigin.Begin);
-                var decoder = new JpegBitmapDecoder(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.Default);
-                var bitmapSource = decoder.Frames[0];
+            memoryStream.Seek(0, SeekOrigin.Begin);
 
-                if(bitmapSource.CanFreeze)
-                    bitmapSource.Freeze();
-
-                OnImageReady?.Invoke(this, bitmapSource);
-            }
-            catch(Exception e)
+            OnFrameReady?.Invoke(this, new FrameReadyEventArgs
             {
-                // ignore errors
-            }
+                Frame = memoryStream.ToArray()
+            });
 
             memoryStream.Position = 0;
             memoryStream.SetLength(0);

@@ -7,8 +7,8 @@ using System.Xml.Serialization;
 
 namespace TestTaskCameras.Models.Api.Interfaces
 {
-	[XmlRoot(ElementName = "ChannelInfo")]
-	public class ChannelInfo
+	[XmlRoot("ChannelInfo")]
+	public class ChannelInfo: IEquatable<ChannelInfo>
 	{
 		[XmlAttribute("Id")]
 		public string Id { get; set; }
@@ -26,28 +26,28 @@ namespace TestTaskCameras.Models.Api.Interfaces
 		public string AttachedToServer { get; set; }
 
 		[XmlAttribute("IsDisabled")]
-		public string IsDisabled { get; set; }
+		public bool IsDisabled { get; set; }
 
 		[XmlAttribute("IsSoundOn")]
-		public string IsSoundOn { get; set; }
+		public bool IsSoundOn { get; set; }
 
 		[XmlAttribute("IsArchivingEnabled")]
-		public string IsArchivingEnabled { get; set; }
+		public bool IsArchivingEnabled { get; set; }
 
 		[XmlAttribute("IsSoundArchivingEnabled")]
-		public string IsSoundArchivingEnabled { get; set; }
+		public bool IsSoundArchivingEnabled { get; set; }
 
 		[XmlAttribute("AllowedRealtime")]
-		public string AllowedRealtime { get; set; }
+		public bool AllowedRealtime { get; set; }
 
 		[XmlAttribute("AllowedArchive")]
-		public string AllowedArchive { get; set; }
+		public bool AllowedArchive { get; set; }
 
 		[XmlAttribute("IsPtzOn")]
-		public string IsPtzOn { get; set; }
+		public bool IsPtzOn { get; set; }
 
 		[XmlAttribute("IsTransmitSoundOn")]
-		public string IsTransmitSoundOn { get; set; }
+		public bool IsTransmitSoundOn { get; set; }
 
 		[XmlAttribute("ArchiveMode")]
 		public string ArchiveMode { get; set; }
@@ -56,6 +56,12 @@ namespace TestTaskCameras.Models.Api.Interfaces
 		public string ArchiveStreamType { get; set; }
 
 		[XmlAttribute("IsFaceAnalystEnabled")]
-		public string IsFaceAnalystEnabled { get; set; }
-	}
+		public bool IsFaceAnalystEnabled { get; set; }
+
+
+        public bool Equals(ChannelInfo other)
+        {
+			return Id == other.Id;
+        }
+    }
 }

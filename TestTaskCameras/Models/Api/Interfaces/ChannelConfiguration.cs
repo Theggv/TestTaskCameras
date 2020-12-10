@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace TestTaskCameras.Models.Api.Interfaces
 {
 	[XmlRoot("Configuration")]
-	public class Configuration
+	public class ChannelConfiguration
 	{
 		[XmlArray("Servers")]
 		[XmlArrayItem("ServerInfo")]

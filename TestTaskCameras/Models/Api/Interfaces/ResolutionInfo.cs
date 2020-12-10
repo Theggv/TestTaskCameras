@@ -8,24 +8,30 @@ using System.Xml.Serialization;
 namespace TestTaskCameras.Models.Api.Interfaces
 {
 	[XmlRoot("ResolutionInfo")]
-	public class ResolutionInfo
+	public class ResolutionInfo: IEquatable<ResolutionInfo>
 	{
 		[XmlAttribute("Width")]
-		public string Width { get; set; }
+		public int Width { get; set; }
 
 		[XmlAttribute("Height")]
-		public string Height { get; set; }
+		public int Height { get; set; }
 
 		[XmlAttribute("IsEnabled")]
-		public string IsEnabled { get; set; }
+		public bool IsEnabled { get; set; }
 
 		[XmlAttribute("FpsLimit")]
 		public string FpsLimit { get; set; }
 
 		[XmlAttribute("UsePFrames")]
-		public string UsePFrames { get; set; }
+		public bool UsePFrames { get; set; }
 
 		[XmlAttribute("Type")]
 		public string Type { get; set; }
-	}
+
+
+        public bool Equals(ResolutionInfo other)
+        {
+			return Type == other.Type;
+        }
+    }
 }

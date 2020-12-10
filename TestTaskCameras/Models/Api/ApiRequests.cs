@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 using TestTaskCameras.Models.Api.Interfaces;
 
@@ -18,7 +11,7 @@ namespace TestTaskCameras.Models.Api
 {
     public static class ApiRequests
     {
-        public static async Task<Configuration> GetConfigurationAsync()
+        public static async Task<ChannelConfiguration> GetConfigurationAsync()
         {
             var url = "http://demo.macroscop.com:8080/configex?login=root";
 
@@ -31,8 +24,8 @@ namespace TestTaskCameras.Models.Api
 
                     using (var reader = new StringReader(content))
                     {
-                        var xmlSerializer = new XmlSerializer(typeof(Configuration));
-                        return (Configuration)xmlSerializer.Deserialize(reader);
+                        var xmlSerializer = new XmlSerializer(typeof(ChannelConfiguration));
+                        return (ChannelConfiguration)xmlSerializer.Deserialize(reader);
                     }
                 }
                 catch (Exception e)
@@ -43,10 +36,22 @@ namespace TestTaskCameras.Models.Api
             }
         }
 
-        public static async Task GetMJpegStreamAsync(CancellationToken token, Action<byte[], int> action, int maxChunkSize = 1024)
+        public static async Task GetMJpegStreamAsync(CameraRequest request, CancellationToken token, Action<byte[], int> action)
         {
-            var url = "http://demo.macroscop.com:8080/mobile?login=root&channelid=2016897c-8be5-4a80-b1a3-7f79a9ec729c&resolutionX=640&resolutionY=480&fps=25";
-            
+            if (request.Channel is null)
+                throw new ArgumentException("request.Channel can not be null.");
+
+            var maxChunkSize = 1024;
+
+            var baseUrl = "http://demo.macroscop.com:8080";
+            var endPoint = $"/mobile?login=root" +
+                $"&channelid={request.Channel.Id}" +
+                $"&resolutionX={request.Resolution?.Width ?? 640}" +
+                $"&resolutionY={request.Resolution?.Height ?? 480}" +
+                $"&fps=25";
+
+            var url = baseUrl + endPoint;
+
             using (var client = new HttpClient())
             {
                 using(var stream = await client.GetStreamAsync(url))
@@ -60,6 +65,8 @@ namespace TestTaskCameras.Models.Api
                     }
                 }
             }
+
+            Console.WriteLine();
         }
     }
 }

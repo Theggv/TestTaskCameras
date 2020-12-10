@@ -12,8 +12,10 @@ namespace TestTaskCameras.Models.Api.Interfaces
 	{
 		[XmlAttribute(AttributeName = "Id")]
 		public string Id { get; set; }
+
 		[XmlAttribute(AttributeName = "Name")]
 		public string Name { get; set; }
+
 		[XmlAttribute(AttributeName = "Url")]
 		public string Url { get; set; }
 	}

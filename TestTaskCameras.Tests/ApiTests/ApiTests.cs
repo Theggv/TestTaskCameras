@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TestTaskCameras.Models;
 using TestTaskCameras.Models.Api;
+using TestTaskCameras.Models.MJpeg;
 
 namespace TestTaskCameras.Tests.ApiTests
 {
@@ -28,7 +30,7 @@ namespace TestTaskCameras.Tests.ApiTests
             var cts = new CancellationTokenSource();
             var parser = new MJpegStreamParser();
 
-            await ApiRequests.GetMJpegStreamAsync(cts.Token, (buffer, len) => parser.BufferHandler(buffer, len));
+            await ApiRequests.GetMJpegStreamAsync(null, cts.Token, (buffer, len) => parser.BufferHandler(buffer, len));
         }
     }
 }

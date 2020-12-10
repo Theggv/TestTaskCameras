@@ -15,19 +15,19 @@ namespace TestTaskCameras.Models.Api.Interfaces
 		public List<ResolutionInfo> Resolutions { get; set; }
 
 		[XmlAttribute("IsEnabled")]
-		public string IsEnabled { get; set; }
+		public bool IsEnabled { get; set; }
 
 		[XmlAttribute("IsProxyEnabled")]
-		public string IsProxyEnabled { get; set; }
+		public bool IsProxyEnabled { get; set; }
 
 		[XmlAttribute("IsMobilePushEnabled")]
-		public string IsMobilePushEnabled { get; set; }
+		public bool IsMobilePushEnabled { get; set; }
 
 		[XmlAttribute("Port")]
-		public string Port { get; set; }
+		public int Port { get; set; }
 
 		[XmlAttribute("UsePFrames")]
-		public string UsePFrames { get; set; }
+		public bool UsePFrames { get; set; }
 
 		[XmlAttribute("FpsLimit")]
 		public string FpsLimit { get; set; }

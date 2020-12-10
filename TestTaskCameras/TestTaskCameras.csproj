@@ -38,6 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +57,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\CameraModel.cs" />
+    <Compile Include="Models\MainModel.cs" />
+    <Compile Include="ViewModels\CameraViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\CameraPreview.xaml.cs">
+      <DependentUpon>CameraPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CameraView.xaml.cs">
+      <DependentUpon>CameraView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,15 +80,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CameraPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CameraView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Api\ApiRequests.cs" />
+    <Compile Include="Models\Api\CameraRequest.cs" />
     <Compile Include="Models\Api\Interfaces\ChannelInfo.cs" />
-    <Compile Include="Models\Api\Interfaces\Configuration.cs" />
+    <Compile Include="Models\Api\Interfaces\ChannelConfiguration.cs" />
     <Compile Include="Models\Api\Interfaces\MobileServerInfo.cs" />
     <Compile Include="Models\Api\Interfaces\ResolutionInfo.cs" />
     <Compile Include="Models\Api\Interfaces\ServerInfo.cs" />
-    <Compile Include="Models\Api\MJpegStreamParser.cs" />
+    <Compile Include="Models\MJpeg\FrameReadyEventArgs.cs" />
+    <Compile Include="Models\MJpeg\MJpegStream.cs" />
+    <Compile Include="Models\MJpeg\MJpegStreamParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -102,9 +125,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
