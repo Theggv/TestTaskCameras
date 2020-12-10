@@ -9,13 +9,13 @@ namespace TestTaskCameras.Models.MJpeg
 
 
         private bool isStartFound = false;
-        private MemoryStream memoryStream;
+        private readonly MemoryStream memoryStream;
 
         private byte currentByte;
         private byte previousByte;
 
 
-        public MJpegStreamParser() 
+        public MJpegStreamParser()
         {
             memoryStream = new MemoryStream();
         }
@@ -31,7 +31,7 @@ namespace TestTaskCameras.Models.MJpeg
                 {
                     currentByte = buffer[index];
 
-                    // SOI (start of image) - header that uses FF D8 as marker of start
+                    // SOI (start of image) - marker of start
                     if (previousByte == 0xff && currentByte == 0xd8)
                     {
                         isStartFound = true;
@@ -49,7 +49,7 @@ namespace TestTaskCameras.Models.MJpeg
                 {
                     currentByte = buffer[index];
 
-                    // EOI (end of image) - header that uses FF D9 as marker of end
+                    // EOI (end of image) - marker of end
                     if (previousByte == 0xff && currentByte == 0xd9)
                     {
                         isStartFound = false;

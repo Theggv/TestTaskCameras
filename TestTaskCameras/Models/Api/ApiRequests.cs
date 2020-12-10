@@ -44,6 +44,7 @@ namespace TestTaskCameras.Models.Api
             var maxChunkSize = 1024;
 
             var baseUrl = "http://demo.macroscop.com:8080";
+            
             var endPoint = $"/mobile?login=root" +
                 $"&channelid={request.Channel.Id}" +
                 $"&resolutionX={request.Resolution?.Width ?? 640}" +

@@ -12,7 +12,7 @@ using TestTaskCameras.ViewModels;
 
 namespace TestTaskCameras.Models
 {
-    public class CameraModel: ViewModelBase
+    public class CameraModel : ViewModelBase
     {
         public ChannelInfo Channel => channel;
 
@@ -31,7 +31,7 @@ namespace TestTaskCameras.Models
         private ResolutionInfo resolution;
 
 
-        public CameraModel() 
+        public CameraModel()
         {
             stream = new MJpegStream(channel, resolution);
             stream.OnFrameReady += UpdateFrame;
@@ -40,7 +40,7 @@ namespace TestTaskCameras.Models
 
         public void SetChannel(ChannelInfo channel)
         {
-            if(channel == null)
+            if (channel == null)
                 return;
 
             this.channel = channel;

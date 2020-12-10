@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace TestTaskCameras.Models
 {
-    public class RelayCommand<T>: ICommand where T : class
+    public class RelayCommand<T> : ICommand where T : class
     {
         private Action<T> execute;
         private Func<T, bool> canExecute;
@@ -44,12 +44,12 @@ namespace TestTaskCameras.Models
 
         public void Execute(object parameter)
         {
-            if(parameter is T)
+            if (parameter is T)
                 this.execute(parameter as T);
         }
     }
 
-    public class RelayCommand: ICommand
+    public class RelayCommand : ICommand
     {
         private Action execute;
         private Func<bool> canExecute;

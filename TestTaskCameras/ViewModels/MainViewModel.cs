@@ -19,10 +19,10 @@ namespace TestTaskCameras.ViewModels
             {
                 if (selectedCamera != value)
                 {
-                    if(selectedCamera != null)
+                    if (selectedCamera != null)
                         selectedCamera.IsEnable = false;
 
-                    if(value != null)
+                    if (value != null)
                         value.IsEnable = true;
 
                     SetProperty(ref selectedCamera, value);
@@ -33,7 +33,7 @@ namespace TestTaskCameras.ViewModels
 
         public Visibility CameraVisibility
         {
-            get => SelectedCamera != null ? Visibility.Visible : Visibility.Collapsed;
+            get => SelectedCamera != null ? Visibility.Visible : Visibility.Hidden;
         }
 
         public IReadOnlyCollection<CameraViewModel> AvailableCameras => cameras.AsReadOnly();
@@ -65,7 +65,7 @@ namespace TestTaskCameras.ViewModels
 
                         model.Configuration.Channels.ForEach(channel =>
                         {
-                            var vm = new CameraViewModel(channel, 
+                            var vm = new CameraViewModel(channel,
                                 model.Configuration.MobileServerInfo.Resolutions);
 
                             cameras.Add(vm);
