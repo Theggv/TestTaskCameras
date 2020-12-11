@@ -64,13 +64,20 @@ namespace TestTaskCameras.Models.MJpeg
             streamMode = mode;
             cts = new CancellationTokenSource();
 
-            Task.Run(async () =>
-                await ApiRequests.GetMJpegStreamAsync(cameraRequest, cts.Token, 
-                        (buffer, length) => parser.BufferHandler(buffer, length))
+            Task.Factory.StartNew(async () =>
+                {
+                    await ApiRequests.GetMJpegStreamAsync(
+                        cameraRequest, 
+                        cts.Token,
+                        (buffer, length) => parser.BufferHandler(buffer, length));
+                },
+                streamMode == StreamMode.Streaming ? 
+                    TaskCreationOptions.LongRunning :
+                    TaskCreationOptions.None
             );
         }
 
-        public void Stop() 
+        public void Stop()
         {
             isStarted = false;
 
@@ -96,7 +103,7 @@ namespace TestTaskCameras.Models.MJpeg
             {
                 cameraRequest.Channel = channel;
 
-                if(isStarted)
+                if (isStarted)
                     Restart();
             }
         }
@@ -110,7 +117,7 @@ namespace TestTaskCameras.Models.MJpeg
             {
                 cameraRequest.Resolution = resolution;
 
-                if(isStarted)
+                if (isStarted)
                     Restart();
             }
         }

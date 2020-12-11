@@ -26,6 +26,7 @@ namespace TestTaskCameras.Models
 
         private readonly MJpegStream stream;
         private BitmapImage frame;
+        private readonly MemoryStream memoryStream;
 
         private ChannelInfo channel;
         private ResolutionInfo resolution;
@@ -35,6 +36,8 @@ namespace TestTaskCameras.Models
         {
             stream = new MJpegStream(channel, resolution);
             stream.OnFrameReady += UpdateFrame;
+
+            memoryStream = new MemoryStream();
         }
 
 
@@ -68,13 +71,22 @@ namespace TestTaskCameras.Models
 
         private void UpdateFrame(object sender, FrameReadyEventArgs e)
         {
-            var image = new BitmapImage();
-            image.BeginInit();
-            image.StreamSource = new MemoryStream(e.Frame);
-            image.EndInit();
-            image.Freeze();
+            try
+            {
+                memoryStream.Position = 0;
+                memoryStream.SetLength(0);
+                memoryStream.Write(e.Frame, 0, e.Frame.Length - 1);
+                memoryStream.Seek(0, SeekOrigin.Begin);
 
-            Frame = image;
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.StreamSource = new MemoryStream(e.Frame);
+                image.EndInit();
+                image.Freeze();
+
+                Frame = image;
+            }
+            catch (Exception ex) { }
         }
     }
 }
